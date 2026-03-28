@@ -1,7 +1,11 @@
 .banner {
   width: 100%;
-  padding-block: 2.5rem;
+  padding-block: 1.5rem; /* Mobile: espaçamento menor */
   overflow: hidden;
+
+  @media (min-width: 768px) {
+    padding-block: 2.5rem;
+  }
 
   .scroller {
     width: 100%;
@@ -13,7 +17,6 @@
     display: flex;
     gap: 1.5rem;
     padding: 1rem;
-
     animation: rolling 2s linear infinite;
   }
 
@@ -25,7 +28,6 @@
     );
     background-size: 400%;
     background-position: 0 50%;
-
     animation: bg-gradient 20s ease infinite;
   }
 }
@@ -38,6 +40,6 @@
 
 @keyframes rolling {
   to {
-    transform: translateX(-132px)
+    transform: translateX(-132px);
   }
 }

@@ -12,7 +12,6 @@
   --snitap-joy-light: #F472B6;
   --snitap-leaf-mid: #16A34A;
 
-
   --text: #000000;
   --highlights: #000000;
   --background: #FAFAFA;
@@ -21,8 +20,36 @@
 
   --text-sm: 0.875rem;
   --text-base: 1rem;
-  --text-lg: 2.5rem;
-  --text-xl: 4rem;
+
+  /* Mobile: fontes menores */
+  --text-lg: 1.75rem;
+  --text-xl: 2rem;
+
+  /*
+    --slide-h deve sempre corresponder a:
+    font-size do h1 * line-height (1.25)
+    Mobile:  2rem * 1.25 = 2.5rem
+    Desktop: 4rem * 1.25 = 5rem
+  */
+  --slide-h: 2.5rem;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  :root {
+    --text-lg: 2rem;
+    --text-xl: 3rem;
+    --slide-h: 3.75rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  :root {
+    --text-lg: 2.5rem;
+    --text-xl: 4rem;
+    --slide-h: 5rem;
+  }
 }
 
 html, button {

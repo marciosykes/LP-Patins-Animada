@@ -1,22 +1,40 @@
 section.hero {
   max-width: 80rem;
   width: 100%;
-  padding: 2.5rem 2rem;
+  padding: 2rem 1.25rem;
   margin-inline: auto;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   overflow: hidden;
 
+  /* Mobile: coluna empilhada, centralizada */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+
+  /* Desktop: linha lado a lado */
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    padding: 2.5rem 2rem;
+  }
+
+  /* Título */
   & h1 {
-    max-width: 40rem;
+    max-width: 100%;
+    text-align: center;
+
+    @media (min-width: 1024px) {
+      max-width: 40rem;
+      text-align: left;
+    }
   }
 
   & h1 div {
     display: inline-block;
     overflow: hidden;
-    height: 5rem;
+    height: var(--slide-h); /* Dinâmico via CSS variable */
     width: min-content;
     vertical-align: bottom;
   }
@@ -36,28 +54,43 @@ section.hero {
 
   & h1 span {
     display: block;
-
     animation: slideUp 5s 2s infinite ease;
   }
 
-  /* buttons */
+  /* Botões */
   & .buttons {
     display: flex;
-    gap: 2rem;
-    margin-top: 3rem;
+    flex-direction: column; /* Mobile: empilhados */
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row; /* Tablet+: lado a lado */
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      justify-content: flex-start;
+      margin-top: 3rem;
+    }
 
     & .button {
       display: flex;
       align-items: center;
       gap: .75rem;
-
       border-radius: 5rem;
-
       transition: scale 350ms;
 
       &.buy {
-        padding: 1.5rem 3rem;
+        padding: 1.25rem 2rem; /* Mobile: menor */
         background-color: var(--snitap-sun);
+
+        @media (min-width: 768px) {
+          padding: 1.5rem 3rem;
+        }
       }
 
       &.play span {
@@ -73,20 +106,30 @@ section.hero {
     }
 
     & .shadow {
-      box-shadow: 
-      0 2px 5px rgb(0 0 0 / .1),
-      0 9px 9px rgb(0 0 0 / .09),
-      0 20px 12px rgb(0 0 0 / .05),
-      0 36px 15px rgb(0 0 0 / .01);
+      box-shadow:
+        0 2px 5px rgb(0 0 0 / .1),
+        0 9px 9px rgb(0 0 0 / .09),
+        0 20px 12px rgb(0 0 0 / .05),
+        0 36px 15px rgb(0 0 0 / .01);
     }
   }
 
-  /* patins */
+  /* Imagem dos patins */
   & > div:nth-child(2) {
     display: block;
     width: 100%;
-    max-width: 30.5rem;
-    height: 30.5rem;
+    max-width: 18rem; /* Mobile: menor */
+    height: 18rem;
+
+    @media (min-width: 768px) {
+      max-width: 25rem;
+      height: 25rem;
+    }
+
+    @media (min-width: 1024px) {
+      max-width: 30.5rem;
+      height: 30.5rem;
+    }
 
     & .content {
       width: 100%;
@@ -103,14 +146,12 @@ section.hero {
       width: 94%;
       top: 3%;
       left: 3%;
-
       transform: translateX(200%);
       animation: slideIn 3s 200ms ease forwards;
     }
 
     & img[src*="patins"] {
       z-index: 1;
-
       transform: translateX(200%);
       animation: slideIn 3s ease forwards;
     }
@@ -119,7 +160,6 @@ section.hero {
       max-width: 5.5rem;
       top: 30%;
       z-index: 0;
-
       opacity: 0;
       transform: translateX(400%);
       animation: slideIn 2s 800ms ease both, appear 100ms 800ms both;
@@ -129,7 +169,6 @@ section.hero {
       max-width: 2.5rem;
       right: 0;
       bottom: 35%;
-
       transform: translateX(400%);
       animation: slideIn 2.2s 800ms ease both;
     }
@@ -140,7 +179,6 @@ section.hero {
   50% {
     transform: translateX(-20px);
   }
-
   100% {
     transform: translateX(0);
   }
@@ -152,68 +190,57 @@ section.hero {
   }
 }
 
+/*
+  slideUp usa var(--slide-h) para se adaptar ao font-size de cada breakpoint.
+  A variável é definida no global.css e muda nos media queries.
+*/
 @keyframes slideUp {
   0%, 22% {
     transform: translateY(0);
   }
-
   23% {
-    transform: translateY(calc(-5rem - 15px));
+    transform: translateY(calc(-1 * var(--slide-h) - 15px));
   }
-
   25% {
-    transform: translateY(calc(-5rem + 10px));
+    transform: translateY(calc(-1 * var(--slide-h) + 10px));
   }
-
   27% {
-    transform: translateY(calc(-5rem - 5px));
+    transform: translateY(calc(-1 * var(--slide-h) - 5px));
   }
-
   29% {
-    transform: translateY(calc(-5rem + 5px));
+    transform: translateY(calc(-1 * var(--slide-h) + 5px));
   }
-  
   33%, 55% {
-    transform: translateY(-5rem);
+    transform: translateY(calc(-1 * var(--slide-h)));
   }
-
   56% {
-    transform: translateY(calc(-10rem - 15px));
+    transform: translateY(calc(-2 * var(--slide-h) - 15px));
   }
-
   58% {
-    transform: translateY(calc(-10rem + 10px));
+    transform: translateY(calc(-2 * var(--slide-h) + 10px));
   }
-
   60% {
-    transform: translateY(calc(-10rem - 5px));
+    transform: translateY(calc(-2 * var(--slide-h) - 5px));
   }
-
   62% {
-    transform: translateY(calc(-10rem + 5px));
+    transform: translateY(calc(-2 * var(--slide-h) + 5px));
   }
-
   66%, 88% {
-    transform: translateY(-10rem);
+    transform: translateY(calc(-2 * var(--slide-h)));
   }
-
   89% {
-    transform: translateY(calc(-15rem - 15px));
+    transform: translateY(calc(-3 * var(--slide-h) - 15px));
   }
-
   91% {
-    transform: translateY(calc(-15rem + 10px));
+    transform: translateY(calc(-3 * var(--slide-h) + 10px));
   }
-
   93% {
-    transform: translateY(calc(-15rem - 5px));
+    transform: translateY(calc(-3 * var(--slide-h) - 5px));
   }
-
   95% {
-    transform: translateY(calc(-15rem + 5px));
+    transform: translateY(calc(-3 * var(--slide-h) + 5px));
   }
-
   100% {
-    transform: translateY(-15rem);
+    transform: translateY(calc(-3 * var(--slide-h)));
   }
 }
